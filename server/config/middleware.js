@@ -5,7 +5,6 @@ import dentistRoute from '../dentists/routes';
 import morgan from 'morgan';
 
 export default function( app, express ) {
-	const reviewRouter = express.Router();
 	const dentistRouter = express.Router();
 	// 3rd party middleware
 	app.use(cors({
@@ -15,9 +14,7 @@ export default function( app, express ) {
 	app.use(bodyParser.urlencoded());
 	app.use(morgan('dev'));
 
-	app.use('/reviews', reviewRouter);
 	app.use('/dentists', dentistRouter)
 
-	reviewRoute( reviewRouter );
 	dentistRoute( dentistRouter );
 }
