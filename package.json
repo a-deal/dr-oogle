@@ -1,10 +1,10 @@
 {
-  "name": "podium-oogl",
+  "name": "podium-oogle",
   "version": "0.2.2",
   "description": "Starter project for an ES6 RESTful Express API",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "sudo nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Andrew Deal",
@@ -15,6 +15,9 @@
     "compression": "^1.5.2",
     "cors": "^2.7.1",
     "express": "^4.13.3",
-    "resource-router-middleware": "^0.5.1"
+    "morgan": "^1.6.1",
+    "pg": "^4.4.4",
+    "resource-router-middleware": "^0.5.1",
+    "sequelize": "^3.19.2"
   }
 }

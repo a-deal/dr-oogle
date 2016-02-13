@@ -10,9 +10,9 @@ export default function( app, express ) {
 		exposedHeaders: ['Link']
 	}));
 
-	app.use(bodyParser.json({
-		limit : '100kb'
-	}));
+	app.use(bodyParser.urlencoded());
+	// app.use(bodyParser.json());
+
 
 	app.use(morgan('dev'));
 
