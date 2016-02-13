@@ -5,7 +5,7 @@ export var sequelize = new Sequelize ('oogle', '', '', {
     loggine : console.log
 });
 
-var Author = sequelize.define('authors', {
+var Dentist = sequelize.define('dentists', {
   firstName : {
     type : Sequelize.STRING,
     allowNull : false,
@@ -17,10 +17,49 @@ var Author = sequelize.define('authors', {
     allowNull : false,
     field : 'last_name',
     unique : true
+  },
+  url : {
+    type: Sequelize.STRING
+  },
+  location : {
+    type:Sequelize.STRING
   }
 })
 
-Author.sync();
+var Reviews = sequelize.define('reviews', {
+  comments : {
+    type : Sequelize.TEXT,
+    allowNull : false,
+    field : 'content'
+  },
+  date: {
+    type : Sequelize.DATE,
+    allowNull : false,
+    field : 'date'
+  },
+  author_firstName: {
+    type : Sequelize.STRING,
+    allowNull : false,
+    field : 'author_firstname'
+  },
+  author_lastName: {
+    type : Sequelize.STRING,
+    allowNull : false,
+    field : 'author_lastname'
+  },
+  rating : {
+    type : Sequelize.INTEGER,
+    field : 'rating'
+  }
 
-export { Author }
+})
+
+Dentist.hasMany(Review, {
+  foreignKey : 'dentist_id'
+});
+Dentist.sync();
+Review.sync();
+
+
+export { Dentist }
 export { Review }
