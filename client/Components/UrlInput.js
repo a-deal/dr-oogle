@@ -8,29 +8,28 @@ class UrlInput extends Component {
 		super(props)
 		this.state = {
 			scraped: true,
-			scrapedReviews: null
-			//{
-			//	dentist: 'ANDREW DEAL',
-			//	reviews: [
-			//		{
-			//			rating: 'five',
-			//			author: 'jira',
-			//			comment: 'some lorem ipsum stuff here',
-			//			date: '022616'
-			//		},
-			//		{
-			//			rating: 'four',
-			//			author: 'hannaha',
-			//			comment: 'some lorem ipsum stuff here',
-			//			date: '112616'
-			//		},
-			//		{
-			//			rating: 'three',
-			//			author: 'adam',
-			//			comment: 'some lorem ipsum stuff here',
-			//			date: '021615'
-			//		}
-			//]}
+			scrapedReviews: {
+				dentist: 'ANDREW DEAL',
+				reviews: [
+					{
+						rating: 'five',
+						author: 'jira',
+						comment: 'some lorem ipsum stuff here',
+						date: '022616'
+					},
+					{
+						rating: 'four',
+						author: 'hannaha',
+						comment: 'some lorem ipsum stuff here',
+						date: '112616'
+					},
+					{
+						rating: 'three',
+						author: 'adam',
+						comment: 'some lorem ipsum stuff here',
+						date: '021615'
+					}
+			]}
 		}
 	}
 

@@ -2,6 +2,7 @@ import { findAndParseReviews } from '../lib/util.js';
 import { addDentistAndReview, getReviewsByDentistID, getDentists } from './model.js';
 
 export function addReviews ( req, res, next ) {
+  console.log('in add Reviews request is ', req.body);
     findAndParseReviews(req.body.url)
       .then((formattedReviews) => {
         addDentistAndReview(formattedReviews);
@@ -13,6 +14,7 @@ export function addReviews ( req, res, next ) {
 }
 
 export function getDentistReviews ( req, res, next ) {
+  console.log('in getDentistReviews request is ', req.body);
   getReviewsByDentistID(req.params)
     .then((reviews) => {
       res.status(200).send(reviews);
@@ -23,6 +25,7 @@ export function getDentistReviews ( req, res, next ) {
 }
 
 export function getAllDentists ( req, res, next ) {
+  console.log('in getAllDentists request is ', req.body);
   getDentists()
     .then((dentists) =>{
       res.status(200).send(dentists);

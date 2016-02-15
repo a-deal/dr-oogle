@@ -22,9 +22,19 @@ class Reviews extends Component {
 		}
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		//fetch all dentist names
-		this.init()
+		// this.init()
+		console.log('hello in componentDidMount')
+		let self = this
+		getAllDentists()
+			.then((results) => {
+				console.log('hello called get all dentists!', this)
+				self.setState({
+					dentists: results.data
+				})
+			})
+		console.log('state is', this.state.dentists)
 	}
 
 	init() {
@@ -89,15 +99,18 @@ class Reviews extends Component {
 		//			]}
 		//	})
 		//}
+		console.log('before getDentistReviews')
 		getDentistReviews(id)
 			.then((res) => {
+				console.log('called get dentist reviews', res.data)
 				this.setState({
-					dentistReviews: res
+					dentistReviews: res.data
 				})
 			})
 	}
 
 	render() {
+		console.log('rendering Reviews:', this.state.dentists)
 		let { dentists } = this.state
 		let listOfDentists = dentists.map((dentist) => {
 			var request = () => this.handleRequest(dentist.id);
