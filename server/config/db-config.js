@@ -1,21 +1,26 @@
 import Sequelize from 'sequelize';
+let sequelize = null;
 
-export var sequelize = new Sequelize ('oogle', '', '', {
-    dialect : 'postgres'
-  });
+if (process.env.DATABASE_URL) {
+  sequelize = new Sequelize (process.env.DATABASE_URL, {
+    dialect: 'postgres'
+  })
+} else {
+  sequelize = new Sequelize ('oogle', '', '', {
+     dialect : 'postgres'
+   });
+}
 
 export var Dentists = sequelize.define('dentists', {
   firstName : {
     type : Sequelize.STRING,
     allowNull : false,
     field : 'first_name',
-    unique : true
   },
   lastName: {
     type : Sequelize.STRING,
     allowNull : false,
     field : 'last_name',
-    unique : true
   },
   url : {
     type: Sequelize.STRING
@@ -28,17 +33,14 @@ export var Dentists = sequelize.define('dentists', {
 export var Reviews = sequelize.define('reviews', {
   comment : {
     type : Sequelize.TEXT,
-    allowNull : false,
     field : 'comment'
   },
   date: {
     type : Sequelize.STRING,
-    allowNull : false,
     field : 'date'
   },
   author: {
     type : Sequelize.STRING,
-    allowNull : false,
     field : 'author'
   },
   rating : {
@@ -49,8 +51,5 @@ export var Reviews = sequelize.define('reviews', {
 })
 
 Dentists.sync();
+Dentists.hasMany(Reviews, { as : 'dentist_id' });
 Reviews.sync();
-
-Dentists.hasMany(Reviews, {
-  foreignKey : 'dentist_id'
-});
