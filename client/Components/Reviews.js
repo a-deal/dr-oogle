@@ -7,24 +7,12 @@ class Reviews extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			dentists: null,
-			//		[
-			//	{ name: 'dr deal',
-			//		id: 12 },
-			//	{ name: 'dr vinyoo',
-			//		id: 10 },
-			//	{ name: 'dr wilson',
-			//		id: 32 },
-			//	{ name: 'dr bothman',
-			//		id: 4}
-			//],
-			dentistReviews: null
+			dentists: [],
+			dentistReviews: []
 		}
 	}
 
 	componentWillMount() {
-		//fetch all dentist names
-		// this.init()
 		console.log('hello in componentDidMount')
 		let self = this
 		getAllDentists()
@@ -33,23 +21,22 @@ class Reviews extends Component {
 				this.setState({
 					dentists: results.data
 				})
-
+				this.render();
 				console.log(self)
 			}.bind(this))
 			.then(function() {
 				console.log('state is', this.state.dentists)
-
 			})
 	}
 
-	init() {
-		getAllDentists()
-			.then((results) => {
-				this.setState({
-					dentists: results
-				})
-			})
-	}
+	// init() {
+	// 	getAllDentists()
+	// 		.then((results) => {
+	// 			this.setState({
+	// 				dentists: results
+	// 			})
+	// 		})
+	// }
 
 	handleRequest(id) {
 		//if(id === 12) {
