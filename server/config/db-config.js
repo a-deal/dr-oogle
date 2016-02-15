@@ -11,26 +11,7 @@ if (process.env.DATABASE_URL) {
    });
 }
 
-export var Dentists = sequelize.define('dentists', {
-  firstName : {
-    type : Sequelize.STRING,
-    allowNull : false,
-    field : 'first_name',
-  },
-  lastName: {
-    type : Sequelize.STRING,
-    allowNull : false,
-    field : 'last_name',
-  },
-  url : {
-    type: Sequelize.STRING
-  },
-  location : {
-    type: Sequelize.STRING
-  }
-})
-
-export var Reviews = sequelize.define('reviews', {
+let Reviews = sequelize.define('reviews', {
   comment : {
     type : Sequelize.TEXT,
     field : 'comment'
@@ -50,6 +31,29 @@ export var Reviews = sequelize.define('reviews', {
 
 })
 
-Dentists.sync();
-Dentists.hasMany(Reviews, { as : 'dentist_id' });
-Reviews.sync();
+let Dentists = sequelize.define('dentists', {
+  firstName : {
+    type : Sequelize.STRING,
+    allowNull : false,
+    field : 'first_name',
+  },
+  lastName: {
+    type : Sequelize.STRING,
+    allowNull : false,
+    field : 'last_name',
+  },
+  url : {
+    type: Sequelize.STRING
+  },
+  location : {
+    type: Sequelize.STRING
+  }
+})
+
+// Dentists.hasMany(Reviews);
+let dentist = Reviews.belongsTo(Dentists, { as : 'dentist' });
+
+export { Dentists };
+export { Reviews };
+export { dentist };
+sequelize.sync();
