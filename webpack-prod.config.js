@@ -29,14 +29,14 @@ module.exports = {
 				loader: 'babel',
 				include: path.join(__dirname, 'src'),
 				query: {
-					presets: ['react', 'es2015', 'stage-0'],
+					presets: ['react', 'es2015', 'stage-0']
 				}
 			},
 			{ test: /\.js$/,
 				loader: 'babel',
 				exclude: /node_modules/,
 				query: {
-					presets: ['react', 'es2015', 'stage-0'],
+					presets: ['react', 'es2015', 'stage-0']
 				}
 			}
 		]
