@@ -14,7 +14,7 @@ export function addReviews ( req, res, next ) {
 
 export function getDentistReviews ( req, res, next ) {
   getReviewsByDentistID(req.params)
-    .then((reviews) => {\
+    .then((reviews) => {
       res.status(200).send(reviews);
     })
     .catch((err) => {
