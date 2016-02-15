@@ -1,29 +1,33 @@
 import { Reviews } from '../config/db-config.js';
 import { Dentists } from '../config/db-config.js'
 
-export function addDentistAndReview (dentistReviews) {
-  let firstName = dentistReviews.name.split(' ')[0];
-  let lastName = dentistReviews.name.split(' ')[1];
-  return Dentists.findOrCreate({
-                      where : {
-                        'firstName' : firstName,
-                        'lastName'  : lastName
-                      }})
-                      .then((dentist) => {
-                        return addReviews(dentistReviews.reviews);
-                      })
-}
 
-function addReviews (reviews) {
+let addReviews = (reviews, dentist_id) => {
   let addedReviews = reviews.map((review, index) => {
     return Reviews.create({
       comment : review.comment,
       date : review.date,
       rating : review.rating,
-      author : review.author
+      author : review.author,
+      dentistId : dentist_id
     });
   })
   return Promise.all(addedReviews)
-                .then(() => console.log('Createdd!!!!!!'))
-                .catch((err) => console.log('No go!!!!! ', err))
+}
+
+let addDentist = (name) => {
+  let firstName = name.split(' ')[1];
+  let lastName = name.split(' ')[2];
+  return Dentists.findOrCreate({
+                      where : {
+                        'firstName' : firstName,
+                        'lastName'  : lastName
+                      }})
+}
+
+export function addDentistAndReview (dentistReviews) {
+  return addDentist(dentistReviews.name)
+              .then((dentist) => {
+                return addReviews(dentistReviews.reviews, dentist[0]['id']);
+              })
 }
