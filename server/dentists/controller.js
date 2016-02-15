@@ -6,9 +6,10 @@ export function getReviews ( req, res, next ) {
       .then((formattedReviews) => {
         return addDentistAndReview(formattedReviews);
       })
-      .then(() => res.status(200).send('Review created!!!'))
+      .then(() => {
+        res.status(200).send('Review created!!!')
+      })
       .catch((err) => {
-        console.log(err);
-        res.status(400);
+        res.status(400).send(err);
       });
 }
