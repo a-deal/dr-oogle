@@ -1,5 +1,6 @@
 import express from 'express';
 import middleware from './config/middleware.js'
+import './lib/worker.js'
 
 const app = express();
 
