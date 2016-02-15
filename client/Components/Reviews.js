@@ -28,13 +28,18 @@ class Reviews extends Component {
 		console.log('hello in componentDidMount')
 		let self = this
 		getAllDentists()
-			.then((results) => {
+			.then(function (results) {
 				console.log('hello called get all dentists!', this)
-				self.setState({
+				this.setState({
 					dentists: results.data
 				})
+
+				console.log(self)
+			}.bind(this))
+			.then(function() {
+				console.log('state is', this.state.dentists)
+
 			})
-		console.log('state is', this.state.dentists)
 	}
 
 	init() {
