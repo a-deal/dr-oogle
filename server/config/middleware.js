@@ -14,20 +14,13 @@ export default function( app, express ) {
 	app.use(bodyParser.urlencoded());
 	app.use(morgan('dev'));
 
-	//app.use(express.static(path.join(__dirname, 'dist')))
-	let static_path = path.join(__dirname, 'dist')
+	app.use(express.static(path.join(__dirname, 'dist')))
+
 	app.use('/dentists', dentistRouter)
 
-	//app.use('/', function (req, res) {
-	//	res.sendFile(path.resolve('client/index.html'));
-	//});
-
-	app.use(express.static(static_path))
-			.get('/', function (req, res) {
-				res.sendFile('client/index.html', {
-					root: static_path
-				});
-			})
+	app.use('/', function (req, res) {
+		res.sendFile(path.resolve('client/index.html'));
+	});
 
 	dentistRoute( dentistRouter );
 }
