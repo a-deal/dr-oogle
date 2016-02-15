@@ -28,7 +28,6 @@ let Reviews = sequelize.define('reviews', {
     type : Sequelize.STRING,
     field : 'rating'
   }
-
 })
 
 let Dentists = sequelize.define('dentists', {
@@ -36,11 +35,13 @@ let Dentists = sequelize.define('dentists', {
     type : Sequelize.STRING,
     allowNull : false,
     field : 'first_name',
+    unique : true
   },
   lastName: {
     type : Sequelize.STRING,
     allowNull : false,
     field : 'last_name',
+    unique : true
   },
   url : {
     type: Sequelize.STRING
@@ -50,10 +51,8 @@ let Dentists = sequelize.define('dentists', {
   }
 })
 
-// Dentists.hasMany(Reviews);
-let dentist = Reviews.belongsTo(Dentists, { as : 'dentist' });
+Dentists.hasMany(Reviews);
 
 export { Dentists };
 export { Reviews };
-export { dentist };
 sequelize.sync();

@@ -1,5 +1,5 @@
 import { findAndParseReviews } from '../lib/util.js';
-import { addDentistAndReview, getReviewsByDentistID } from './model.js';
+import { addDentistAndReview, getReviewsByDentistID, getDentists } from './model.js';
 
 export function addReviews ( req, res, next ) {
     findAndParseReviews(req.body.url)
@@ -8,22 +8,26 @@ export function addReviews ( req, res, next ) {
         res.status(201).send(formattedReviews);
       })
       .catch((err) => {
-        console.log(err);
         res.status(400).send(err);
       });
 }
 
 export function getDentistReviews ( req, res, next ) {
   getReviewsByDentistID(req.params)
-    .then((reviews) => {
+    .then((reviews) => {\
       res.status(200).send(reviews);
     })
     .catch((err) => {
-      console.log(err);
-      res.status(500).send(err);
+      res.status(401).send(err);
     })
 }
 
-export function getAllDentistReviews ( req, res, next ) {
-
+export function getAllDentists ( req, res, next ) {
+  getDentists()
+    .then((dentists) =>{
+      res.status(200).send(dentists);
+    })
+    .catch((err) => {
+      res.status(401).send(err);
+    })
 }

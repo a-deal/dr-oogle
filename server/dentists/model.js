@@ -1,21 +1,14 @@
 import { Reviews, Dentists, dentist } from '../config/db-config.js';
 
-let addReviews = (reviews, firstName, lastName) => {
+let addReviews = (reviews, dentistId) => {
   let addedReviews = reviews.map((review, index) => {
-    return Reviews.findOrCreate({
-      where : {
+    return Reviews.create({
         comment : review.comment,
         date : review.date,
         rating : review.rating,
         author : review.author,
-        dentist : {
-          firstName : firstName,
-          lastName : lastName
-        }
-      }
-    },
-    { include : [ dentist ]}
-  );
+        dentistId : dentistId
+      })
   })
   return Promise.all(addedReviews)
 }
@@ -31,17 +24,28 @@ let addDentist = (name) => {
 }
 
 export function getReviewsByDentistID (id) {
-  return Reviews.findAll({ where : { dentistId : id }})
+  return Reviews.findAll({ where : { dentistId : id.id }})
                 .then((reviews) => {
                   return { reviews : reviews };
                 })
+}
+
+export function getDentists () {
+  return Dentists.findAll()
+                 .then((dentists) => {
+                   return dentists.map((dentist) => {
+                     return {
+                       id : dentist.id,
+                       name : dentist.firstName + ' ' + dentist.lastName
+                     }
+                   })
+                 })
 }
 
 
 export function addDentistAndReview (dentistReviews) {
   return addDentist(dentistReviews.name)
               .then((dentist) => {
-                console.log(dentist);
-                return addReviews(dentistReviews.reviews, dentist[0].dataValues.firstName, dentist[0].dataValues.lastName);
+                return addReviews(dentistReviews.reviews, dentist[0]['id']);
               })
 }
