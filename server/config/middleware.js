@@ -24,7 +24,7 @@ export default function( app, express ) {
 
 	app.use(express.static(static_path))
 			.get('/', function (req, res) {
-				res.sendFile('index.html', {
+				res.sendFile('client/index.html', {
 					root: static_path
 				});
 			})
