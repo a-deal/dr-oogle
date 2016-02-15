@@ -1,6 +1,56 @@
 import Xray from 'x-ray';
 // import Osmosis from 'osmosis';
 
+let parseReviews = (reviews) => {
+	return {
+		name    : parseDentistName(reviews[0].text),
+		reviews : formatReviews(reviews)
+	}
+}
+
+let parseDentistName = (text) => {
+	let name = text.match(/Dr.(.*?):/);
+	return name === null ? null : name[1];
+}
+
+let parseDate = (text) => {
+	let dateRegex = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/;
+	return text.match(dateRegex) === null ? null : (text.match(dateRegex)[0] || text.match(dateRegex)[1]);
+}
+
+let parseAuthor = (text) => {
+	let author = text.match(/by\s(.*?)[0-9]/);
+	return author === null ? null : author[1].trim();
+}
+
+let parseRating = (text) => {
+	let rating = text.match(/\s[[0-9].[0-9]\sstars|\s[0-9]\sstars/);
+	return rating === null ? null : rating[0].match(/[0-9].[0-9]|([0-9]{1})/)[0];
+}
+
+let parseComment = (text) => {
+	let dateRegex = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/;
+	return text.slice((text.search(dateRegex)+11)) || null;
+}
+
+let formatReviews = (reviews) => {
+	return reviews.map((review) => {
+			return {
+				 date   : parseDate(review.text),
+				 author : parseAuthor(review.text),
+				 rating : parseRating(review.text),
+				 comment : parseComment(review.text)
+			 }
+		})
+}
+
+let cleanReviews = (reviews) => {
+	return reviews.filter((review) => {
+			review.text = review.text.replace(/\s\s+/g, ' ');
+			return review.text.length > 50 && review.text.match(/Review/);
+	});
+}
+
 export function findAndParseReviews (url) {
 	return new Promise((resolve, reject) => {
 		let x  = Xray();
@@ -10,30 +60,11 @@ export function findAndParseReviews (url) {
 		.paginate('#copyheade11:last-child@href')
 		.limit(10)
 		((err, results) => {
-			if (err) {
+			if (err || results.length < 1) {
 				reject(err)
 			} else {
-				let comments = results.filter((review) => {
-						review.text = review.text.replace(/\s\s+/g, ' ');
-						return review.text.length > 35 && review.text.match(/Review/);
-				})
-				resolve(parseReviews(comments))
+				resolve(parseReviews(cleanReviews(results)));
 			}
 		})
 	})
-}
-
-function parseReviews (reviews) {
-	let name = reviews[0].text.match(/Dr.(.*?):/)[1].trim();
-	reviews = reviews.map((review) => {
-	 let dateRegex = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/;
-	 let comment = {
-		  date   : review.text.match(dateRegex)[0],
-		  author : review.text.match(/by\s(.*?)[0-9]/)[1].trim(),
-		  rating : review.text.match(/\s[[0-9].[0-9]\sstars|\s[0-9]\sstars/)[0].match(/[0-9].[0-9]|([0-9]{1})/)[0],
-			comment : review.text.slice((review.text.search(dateRegex)+11))
-		}
-		return comment;
-	})
-	return { name : name, reviews : reviews };
 }
