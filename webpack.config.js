@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-  entry: ['webpack-dev-server/client?http://localhost:8080', './client/index.js'],
+  entry: ['webpack-dev-server/client?http://localhost:8080','./client/index.js'],
 
   output: {
     path: path.join(__dirname, 'dist'),
@@ -12,14 +12,15 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['react', 'es2015', 'stage-0']
-        }
+        test: /\.jsx?$/,
+        exclude: /(node_modules)/,
+        loaders: [ 'babel-loader?presets[]=es2015&presets[]=react&presets[]=stage-0' ],
       },
-    ]
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract( 'style-loader', 'css-loader!cssnext-loader' ),
+      },
+    ],
   }
 
 };

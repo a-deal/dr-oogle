@@ -14,7 +14,8 @@ export default function( app, express ) {
 	app.use(bodyParser.urlencoded());
 	app.use(morgan('dev'));
 
-	app.use(express.static(__dirname + '../../dist'))
+	app.use(express.static(path.resolve(__dirname, 'client')));
+	// app.use(express.static(__dirname + '../../dist'))
 
 	app.use('/dentists', dentistRouter)
 

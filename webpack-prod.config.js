@@ -1,11 +1,10 @@
 var path = require('path');
 var webpack = require('webpack');
+var mainPath =  path.resolve(__dirname, 'client', 'index.js');
 
 module.exports = {
 	devtool: 'source-map',
-	entry: [
-		'./client/index.js'
-	],
+	entry: mainPath,
 	output: {
 		path: path.join(__dirname, 'dist'),
 		filename: 'bundle.js',
@@ -25,7 +24,7 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			{ test: /\.jsx$/,
+			{ test: /\.jsx?$/,
 				loader: 'babel',
 				include: path.join(__dirname, 'src'),
 				query: {
