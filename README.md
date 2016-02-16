@@ -1,6 +1,6 @@
 ### Getting started
 
-Welcome to the Oogle Companion. We enable to quickly find dentist reviews.
+Welcome to the Oogle Companion. We enable you to quickly find dentist reviews.
 To get started, please following the steps below:
 
 1. `createdb oogle`
