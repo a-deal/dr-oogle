@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, hashHistory } from 'react-router'
-import App from './components/App';
-import Reviews from './components/Reviews';
-import Review from './components/Review';
-import UrlInput from './components/UrlInput';
+import App from './Components/App';
+import Reviews from './Components/Reviews';
+import Review from './Components/Review';
+import UrlInput from './Components/UrlInput';
 
 ReactDOM.render(
 	<Router history={hashHistory}>
