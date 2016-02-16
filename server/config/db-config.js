@@ -14,7 +14,8 @@ if (process.env.DATABASE_URL) {
 let Reviews = sequelize.define('reviews', {
   comment : {
     type : Sequelize.TEXT,
-    field : 'comment'
+    field : 'comment',
+    unique : true
   },
   date: {
     type : Sequelize.STRING,
