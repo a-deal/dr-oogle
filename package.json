@@ -28,6 +28,7 @@
     "react": "^0.14.3",
     "react-bootstrap": "^0.28.3",
     "react-dom": "^0.14.3",
+    "react-loader": "^2.0.0",
     "react-router": "^2.0.0",
     "resource-router-middleware": "^0.5.1",
     "sequelize": "^3.19.2",
