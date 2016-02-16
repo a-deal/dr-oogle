@@ -9,52 +9,23 @@ class Reviews extends Component {
 		super(props)
 		this.state = {
 			dentists: [],
-<<<<<<< HEAD
-			dentistReviews: []
-		}
-	}
-
-	componentWillMount() {
-		console.log('hello in componentDidMount')
-		let self = this
-=======
 			dentistReviews: null,
 			isLoading: false
 		}
 	}
 
 	componentDidMount() {
->>>>>>> 3964680b66b2f2faf2a2eeba9d10cdeff8de9086
 		getAllDentists()
 			.then((results) => {
 				this.setState({
 					dentists: results.data
 				})
-<<<<<<< HEAD
-				this.render();
-				console.log(self)
-			}.bind(this))
-			.then(function() {
-				console.log('state is', this.state.dentists)
-			})
-	}
-
-	// init() {
-	// 	getAllDentists()
-	// 		.then((results) => {
-	// 			this.setState({
-	// 				dentists: results
-	// 			})
-	// 		})
-	// }
-=======
 				this.render()
 			})
 			.catch((err) => {
 				console.log(err)
 			})
 	}
->>>>>>> 3964680b66b2f2faf2a2eeba9d10cdeff8de9086
 
 	handleRequest(id, name) {
 		this.setState({
