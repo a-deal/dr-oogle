@@ -11,6 +11,7 @@ export default function( app, express ) {
 		exposedHeaders: ['Link']
 	}));
 
+	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded());
 	app.use(morgan('dev'));
 

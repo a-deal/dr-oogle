@@ -12,7 +12,7 @@ export default class App extends Component {
 							<Row style={{paddingBottom: '15px', marginBottom: '25px', borderBottom: '1px lightgray solid'}}>
 								<Col md={12}>
 									<h1>
-										Dr. Oogle
+										Oogle Companion
 										<span style={{ float: 'right' }}>
 
 											<Button bsSize="large" bsStyle="success" style={{marginRight: '10px'}}>

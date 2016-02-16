@@ -5,7 +5,9 @@ export function scrapeLink(link) {
 	return axios({
 		method: 'post',
 		url: '/dentists',
-		data: link
+		data: {
+			url: link
+		}
 	})
 }
 

@@ -2,7 +2,6 @@ import { findAndParseReviews } from '../lib/util.js';
 import { addDentistAndReview, getReviewsByDentistID, getDentists } from './model.js';
 
 export function addReviews ( req, res, next ) {
-  console.log('in add Reviews request is ', req.body);
     findAndParseReviews(req.body.url)
       .then((formattedReviews) => {
         addDentistAndReview(formattedReviews);
