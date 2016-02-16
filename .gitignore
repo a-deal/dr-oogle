@@ -18,8 +18,6 @@ bower_components
 npm-debug.log
 node_modules
 server_old
-<<<<<<< HEAD
+
 public
-=======
-public
->>>>>>> 3964680b66b2f2faf2a2eeba9d10cdeff8de9086
+.DS_Store

@@ -1,6 +1,10 @@
 Getting started
 
-Assumes you have npm, node, postgres installed on local computer
+Welcome to the Oogle Companion. We enable to quickly find dentist reviews.
+To get started, please following the steps below:
 
-`createdb oogle` to create database
-`nodemon index.js` to start server
+1. `createdb oogle`
+2. `npm install`
+3. `npm start`
+
+** This guide assumes you have node, npm and postgres installed.
