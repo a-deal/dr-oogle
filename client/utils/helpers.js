@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 export function scrapeLink(link) {
-	console.log('link:', link)
 	return axios({
 		method: 'post',
 		url: '/dentists',
