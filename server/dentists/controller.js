@@ -13,7 +13,6 @@ export function addReviews ( req, res, next ) {
 }
 
 export function getDentistReviews ( req, res, next ) {
-  console.log('in getDentistReviews request is ', req.body);
   getReviewsByDentistID(req.params)
     .then((reviews) => {
       res.status(200).send(reviews);
@@ -24,7 +23,6 @@ export function getDentistReviews ( req, res, next ) {
 }
 
 export function getAllDentists ( req, res, next ) {
-  console.log('in getAllDentists request is ', req.body);
   getDentists()
     .then((dentists) =>{
       res.status(200).send(dentists);
